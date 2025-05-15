@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pirate Crypto Payment</title>
+  </head>
+  <body>
+    <h1>Pay Yer Pirate Dues!</h1>
+    <h2>Treasure for Sale</h2>
+    <ul>
+      <% products.forEach(function(product) { %>
+      <li>
+        <strong><%= product.name %></strong><br />
+        Price: $<%= product.price.toFixed(2) %> <br />
+        BTC: <%= (product.price / crypto.BTC).toFixed(6) %> <br />
+        ETH: <%= (product.price / crypto.ETH).toFixed(6) %> <br />
+        <form action="/add-to-cart" method="POST" style="display: inline">
+          <input type="hidden" name="productId" value="<%= product.id %>" />
+          <button type="submit">Add to Cart</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <a href="/cart">View Cart</a>
+  </body>
+</html>

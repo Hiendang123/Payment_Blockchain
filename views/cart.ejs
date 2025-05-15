@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pirate Cart</title>
+  </head>
+  <body>
+    <h1>Yer Booty</h1>
+    <% if (cart.length === 0) { %>
+    <p>Ye have no booty in yer cart!</p>
+    <a href="/">Back to Shop</a>
+    <% } else { %>
+    <ul>
+      <% cart.forEach(function(product) { %>
+      <li>
+        <strong><%= product.name %></strong> - $<%= product.price.toFixed(2) %>
+      </li>
+      <% }) %>
+    </ul>
+    <p><strong>Total:</strong> $<%= total.toFixed(2) %></p>
+    <p>BTC: <%= (total / crypto.BTC).toFixed(6) %></p>
+    <p>ETH: <%= (total / crypto.ETH).toFixed(6) %></p>
+    <form action="/create-charge" method="POST">
+      <label for="wallet">Yer Wallet Address:</label>
+      <input
+        type="text"
+        id="wallet"
+        name="wallet"
+        required
+        placeholder="0x... or bc1..."
+      />
+      <button type="submit">Pay with Crypto</button>
+    </form>
+    <a href="/">Back to Shop</a>
+    <% } %>
+  </body>
+</html>
